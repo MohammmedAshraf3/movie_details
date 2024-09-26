@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
+  final String movieId;
   final String title;
   final String year;
   final String rating;
@@ -12,6 +12,7 @@ class MovieDetailsScreen extends StatelessWidget {
 
   const MovieDetailsScreen({
     Key? key,
+    required this.movieId,
     required this.title,
     required this.year,
     required this.rating,
@@ -25,15 +26,15 @@ class MovieDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff707070),
+        backgroundColor: const Color(0xff1D1E1D),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          "                                                                         Movie Name",
-          style: TextStyle(color: Colors.white),
-          //  textAlign: TextAlign.center
+        title: Text(
+          title, // Use the actual movie title here
+          style: const TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
         ),
       ),
       backgroundColor: Colors.black,
@@ -44,11 +45,11 @@ class MovieDetailsScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  height: 250,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                Image.asset(
+                  'assets/images/dora.jpg',
+                  width: 1200,
+                  height: 240,
+                  fit: BoxFit.fitWidth,
                 ),
                 const Icon(
                   Icons.play_circle_fill,
@@ -63,7 +64,7 @@ class MovieDetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    'Dora and the Lost City of Gold',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -72,25 +73,23 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "$year • PG-13 • 2h 7m", // Replace with actual data
+                    "$year • PG-13 • 2h 7m",
                     style: const TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 16),
-                  // Display Movie Poster
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        height: 180,
-                        width: 120,
-                        fit: BoxFit.cover,
+                      Image.asset(
+                        'assets/images/dora.jpg',
+                        width: 240,
+                        height: 240,
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Display Genres
                             Wrap(
                               spacing: 8.0,
                               children: genres.map((genre) {
@@ -99,47 +98,56 @@ class MovieDetailsScreen extends StatelessWidget {
                                     genre,
                                     style: const TextStyle(color: Colors.white),
                                   ),
-                                  backgroundColor: Color(0xff514F4F),
+                                  backgroundColor: const Color(0xff514F4F),
                                 );
                               }).toList(),
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              description,
+                              'Dora, a girl who has spent most of her life exploring the jungle with her parents, now must navigate her most dangerous adventure yet: high school. Always the explorer, Dora quickly finds herself leading Boots (her best friend, a monkey), Diego, and a rag tag group of teens on an adventure to save her parents and solve the impossible mystery behind a lost Inca civilization.',
                               style: const TextStyle(color: Color(0xff514F4F)),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  rating, // Display the movie rating here
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 16),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  // Display Similar Movies
-                  Text(
+                  const SizedBox(height: 32),
+                  const Text(
                     "More Like This",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
-                  const SizedBox(height: 8),
-                  Container(
-                    color: Color(0xff514F4F),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 3 / 4,
-                      ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
                       itemCount: similarMovies.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                          child: CachedNetworkImage(
-                            imageUrl: similarMovies[index]["imageUrl"],
-                            fit: BoxFit.cover,
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: Image.asset('assets/images/MonsterInc.jpg'),
                           ),
                         );
                       },
