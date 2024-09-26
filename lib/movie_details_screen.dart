@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MovieDetailsScreen extends StatelessWidget {
-  final String movieId;
-  final String title;
-  final String year;
-  final String rating;
-  final String description;
-  final String imageUrl;
-  final List<String> genres;
-  final List<Map<String, dynamic>> similarMovies;
-
-  const MovieDetailsScreen({
-    Key? key,
-    required this.movieId,
-    required this.title,
-    required this.year,
-    required this.rating,
-    required this.description,
-    required this.imageUrl,
-    required this.genres,
-    required this.similarMovies,
-  }) : super(key: key);
+  List<String> genres = ['Adeventure', 'Mystery', 'Drama'];
+  MovieDetailsScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +17,7 @@ class MovieDetailsScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          title, // Use the actual movie title here
+          'Dora and the Lost City of Gold', // Use the actual movie title here
           style: const TextStyle(color: Colors.white),
           textAlign: TextAlign.center,
         ),
@@ -47,7 +32,7 @@ class MovieDetailsScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/dora.jpg',
-                  width: 1200,
+                  width: 1400,
                   height: 240,
                   fit: BoxFit.fitWidth,
                 ),
@@ -73,7 +58,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "$year • PG-13 • 2h 7m",
+                    "2022 • PG-13 • 2h 7m",
                     style: const TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 16),
@@ -117,7 +102,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  rating, // Display the movie rating here
+                                  '7.7', // Display the movie rating here
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 16),
                                 ),
@@ -142,7 +127,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     height: 200,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: similarMovies.length,
+                      itemCount: 3, //number of more like this
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),

@@ -20,22 +20,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MovieDetailsScreen(
-        movieId: "",
-
-        title:
-            "                                                                                   Dora and the Lost City of Gold",
-        year: "2022",
-        rating: "7.7",
-        description: "Movie description",
-        imageUrl: "https://via.placeholder.com/300",
-        genres: ["Action", "Adventure", "Comedy"],
-        similarMovies: [
-          {"imageUrl": "https://via.placeholder.com/300"},
-          {"imageUrl": "https://via.placeholder.com/300"},
-          {"imageUrl": "https://via.placeholder.com/300"},
-        ], // part el api
-      ),
+      home: MovieDetailsScreen(),
     );
   }
 }
